@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071225">
+  <title>SOURCE / Loading Loop</title>
+  <style>
+    :root { color-scheme: dark; font-family: "Manrope", "Segoe UI", sans-serif; background: #071225; color: #eef6ff; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; overflow-x: hidden; background: radial-gradient(ellipse at 50% 45%, #10274a 0, #09152a 48%, #050b16 100%); }
+    body::before { position: fixed; inset: 0; background-image: linear-gradient(rgba(41, 127, 196, .09) 1px, transparent 1px), linear-gradient(90deg, rgba(41, 127, 196, .09) 1px, transparent 1px); background-size: 64px 64px; content: ""; mask-image: linear-gradient(transparent, black 18%, black 82%, transparent); pointer-events: none; }
+    main { position: relative; width: min(1120px, calc(100% - 40px)); padding: 36px 0; }
+    header, footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    header { margin-bottom: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; color: #9cafc7; font: 10px "SFMono-Regular", Consolas, monospace; letter-spacing: .14em; }
+    .brand img { width: 42px; height: 42px; object-fit: contain; }
+    .format { color: #7187a5; font: 9px "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .frame { position: relative; overflow: hidden; border: 1px solid rgba(108, 176, 229, .3); background: #050b16; box-shadow: 0 28px 100px rgba(0, 0, 0, .48), 0 0 80px rgba(0, 114, 255, .12); }
+    video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+    footer { padding-top: 18px; }
+    footer p { margin: 0; color: #8195ae; font: 9px "SFMono-Regular", Consolas, monospace; letter-spacing: .1em; text-transform: uppercase; }
+    .download { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(0, 198, 255, .5); padding: 11px 14px; color: #56d5ff; font-size: 11px; text-decoration: none; transition: background .2s, border-color .2s; }
+    .download:hover { border-color: #00c6ff; background: rgba(0, 198, 255, .1); }
+    @media (max-width: 620px) {
+      main { width: calc(100% - 24px); padding: 18px 0; }
+      header { align-items: flex-start; }
+      .format { max-width: 110px; text-align: right; line-height: 1.7; }
+      footer { align-items: flex-start; flex-direction: column; }
+      footer p { line-height: 1.7; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand"><img src="sourcelogo-transparent.png" alt=""><span>SOURCE / AI-DROPHONICS</span></div>
+      <div class="format">Loading loop / 1920 × 1080</div>
+    </header>
+    <div class="frame">
+      <video autoplay loop muted playsinline controls aria-label="SOURCE and AI-Drophonics animated loading video">
+        <source src="source-loading.mp4" type="video/mp4">
+        Your browser does not support MP4 playback.
+      </video>
+    </div>
+    <footer>
+      <p>Six-second seamless loop / Silent / H.264 MP4</p>
+      <a class="download" href="source-loading.mp4" download>Download loading video</a>
+    </footer>
+  </main>
+</body>
+</html>

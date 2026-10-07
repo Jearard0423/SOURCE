@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8cf">
+  <meta name="description" content="AI-Drophonics by SOURCE: intelligent hydroponics monitoring and crop disease detection for urban farms in the Philippines.">
+  <title>AI-Drophonics | SOURCE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link id="brand-favicon" rel="icon" type="image/webp" href="aidroponicslogo.webp">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d351f;
+      --muted: #50664b;
+      --quiet: #73816a;
+      --night: #fff8cf;
+      --panel: #fbe6c2;
+      --line: rgba(42, 124, 19, .19);
+      --cyan: #2a7c13;
+      --blue: #2a7c13;
+      --green: #76c457;
+      --forest: #173d20;
+      --mono: "DM Mono", monospace;
+      --sans: "Manrope", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      background: var(--night);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background-image: linear-gradient(rgba(42, 124, 19, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(42, 124, 19, .045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
+    a { color: inherit; }
+    button { color: inherit; font: inherit; }
+    .wrap { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      border-bottom: 1px solid rgba(42, 124, 19, .15);
+      background: rgba(255, 248, 207, .94);
+      backdrop-filter: blur(18px);
+    }
+    .nav { display: flex; height: 72px; align-items: center; justify-content: space-between; }
+    .wordmark { display: flex; align-items: center; gap: 9px; text-decoration: none; }
+    .nav-logo { width: 46px; height: 46px; object-fit: contain; }
+    .transparent-logo { opacity: 0; transition: opacity .35s ease; }
+    .transparent-logo.is-ready { opacity: 1; }
+    .wordmark-caption { color: var(--quiet); font: 9px var(--mono); letter-spacing: .1em; }
+    .navlinks { display: flex; align-items: center; gap: 34px; }
+    .navlinks a { color: #50664b; font-size: 12px; text-decoration: none; transition: color .2s; }
+    .navlinks a:hover { color: var(--cyan); }
+    .navlinks .nav-cta { border: 1px solid rgba(42, 124, 19, .4); border-radius: 3px; padding: 11px 15px; color: var(--cyan); }
+    .menu-toggle { display: none; border: 0; padding: 8px; background: none; }
+
+    .hero { padding: 64px 0 105px; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--cyan); font: 10px var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { width: 19px; height: 1px; background: currentColor; content: ""; }
+    .image-grid { display: grid; grid-template-columns: 1.18fr .82fr .82fr 1.02fr; gap: 14px; margin: 23px 0 42px; perspective: 1100px; }
+    .image-tile { position: relative; min-width: 0; height: clamp(320px, 29vw, 370px); overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: #18273a; opacity: 0; transform: translateY(58px) rotateY(var(--entry-tilt, -5deg)) scale(.92); filter: blur(7px) saturate(.72); transform-origin: center bottom; transition: opacity .8s ease, transform .95s cubic-bezier(.16,1,.3,1), filter .85s ease, border-color .35s, box-shadow .35s; }
+    .image-tile:nth-child(2) { --entry-tilt: 5deg; }
+    .image-tile:nth-child(3) { --entry-tilt: -4deg; }
+    .image-tile:nth-child(4) { --entry-tilt: 4deg; }
+    .image-grid.is-visible .image-tile { opacity: 1; transform: translateY(0) rotateY(0) scale(1); filter: blur(0) saturate(1); }
+    .image-grid.is-visible .image-tile:nth-child(2) { transition-delay: .13s; }
+    .image-grid.is-visible .image-tile:nth-child(3) { transition-delay: .26s; }
+    .image-grid.is-visible .image-tile:nth-child(4) { transition-delay: .39s; }
+    .image-tile img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .7; transform: scale(1.16); transition: transform 1.35s cubic-bezier(.16,1,.3,1), opacity .8s; }
+    .image-grid.is-visible .image-tile img { opacity: .94; transform: scale(1); transition-delay: .2s; }
+    .image-tile .hardware-photo { object-position: center 60%; }
+    .image-tile::before { position: absolute; z-index: 1; inset: 0; background: linear-gradient(112deg, transparent 28%, rgba(255, 255, 255, .2) 48%, transparent 68%); content: ""; pointer-events: none; transform: translateX(-130%); transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+    .image-grid.is-visible .image-tile::before { transform: translateX(130%); transition-delay: .2s; }
+    .image-grid.is-visible .image-tile:nth-child(2)::before { transition-delay: .34s; }
+    .image-grid.is-visible .image-tile:nth-child(3)::before { transition-delay: .48s; }
+    .image-grid.is-visible .image-tile:nth-child(4)::before { transition-delay: .62s; }
+    .image-grid.is-visible .image-tile:hover { z-index: 2; border-color: rgba(42, 124, 19, .72); box-shadow: 0 24px 48px rgba(42, 74, 25, .22); transform: translateY(-8px) rotateX(var(--pointer-tilt-x, 0deg)) rotateY(var(--pointer-tilt-y, 0deg)) scale(1.025); transition-delay: 0s; }
+    .image-grid.is-visible .image-tile:hover img { transform: scale(1.1); opacity: 1; transition-delay: 0s; }
+    .image-tile::after { position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(5, 12, 22, .9)); content: ""; }
+    .tile-index, .tile-label { position: absolute; z-index: 1; left: 14px; font: 9px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+    .tile-index { top: 13px; color: #e2efff; text-shadow: 0 1px 8px #000; }
+    .tile-label { bottom: 14px; color: white; }
+    .hero-copy { display: grid; grid-template-columns: 1.1fr .9fr; gap: 70px; align-items: end; }
+    h1, h2, p { margin-top: 0; }
+    h1 { max-width: 680px; margin-bottom: 17px; font-size: clamp(38px, 5.4vw, 68px); font-weight: 700; line-height: 1.05; letter-spacing: -.045em; }
+    .gradient-text { color: #2a7c13; background: linear-gradient(95deg, #2a7c13, #76c457 88%); background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub { max-width: 660px; margin: 0; color: #40563b; font-size: 16px; line-height: 1.7; }
+    .hero-body { margin: 0 0 2px; color: var(--muted); font-size: 13px; line-height: 1.9; }
+    .hero-foot { display: flex; align-items: center; gap: 15px; margin-top: 27px; color: var(--quiet); font: 9px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px rgba(118, 196, 87, .7); }
+
+    .app-section { overflow: hidden; padding: 104px 0 110px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 76% 48%, rgba(118, 196, 87, .16), transparent 42%), var(--panel); }
+    .app-layout { display: grid; grid-template-columns: .83fr 1.17fr; gap: 85px; align-items: center; }
+    h2 { margin-bottom: 19px; font-size: clamp(32px, 4vw, 48px); font-weight: 700; line-height: 1.13; letter-spacing: -.04em; }
+    .section-copy { max-width: 440px; color: var(--muted); font-size: 14px; line-height: 1.9; }
+    .metric-list { display: grid; grid-template-columns: 1fr 1fr; margin-top: 30px; border-top: 1px solid var(--line); }
+    .metric { padding: 15px 0; border-bottom: 1px solid var(--line); color: #40563b; font-size: 11px; }
+    .metric:nth-child(odd) { border-right: 1px solid var(--line); }
+    .metric:nth-child(even) { padding-left: 17px; }
+    .metric b { display: block; margin-bottom: 5px; color: #2a7c13; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .app-screens { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; }
+    .app-shot { min-width: 0; margin: 0; text-align: center; }
+    .app-shot { min-width: 0; margin: 0; border: 1px solid rgba(42, 124, 19, .19); border-radius: 8px; padding: 12px; background: var(--night); box-shadow: 0 18px 38px rgba(42, 74, 25, .12); text-align: center; }
+    .app-shot img { display: block; width: 100%; height: auto; border: 1px solid rgba(42, 124, 19, .12); border-radius: 5px; background: #fff; }
+    .app-shot figcaption { margin-top: 12px; color: #2a7c13; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+
+    .demo-section { padding: 105px 0 112px; }
+    .demo-heading { max-width: 680px; margin: 0 auto 37px; text-align: center; }
+    .demo-heading .eyebrow { justify-content: center; margin-bottom: 17px; }
+    .demo-heading p { margin-bottom: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .demo-frame { position: relative; display: grid; width: min(880px, 100%); aspect-ratio: 16 / 8.4; place-items: center; overflow: hidden; margin: 0 auto; border: 1px solid rgba(161, 195, 231, .22); background: #101a2a; }
+    .demo-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .48; filter: saturate(.7); }
+    .demo-frame::after { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8, 14, 25, .67), rgba(8, 14, 25, .3)), linear-gradient(0deg, rgba(8, 14, 25, .7), transparent 70%); content: ""; }
+    .demo-content { position: relative; z-index: 1; text-align: center; }
+    .play-button { display: grid; width: 64px; height: 64px; place-items: center; margin: 0 auto 16px; border: 1px solid rgba(255, 255, 255, .75); border-radius: 50%; background: rgba(0, 114, 255, .72); box-shadow: 0 0 34px rgba(0, 114, 255, .35); cursor: pointer; transition: transform .2s, background .2s; }
+    .play-button:hover { transform: scale(1.07); background: #0072ff; }
+    .play-button svg { width: 17px; margin-left: 3px; }
+    .demo-content strong { display: block; font-size: 12px; }
+    .demo-content span { display: block; margin-top: 5px; color: #d0dbea; font: 9px var(--mono); }
+    .demo-status { margin-top: 17px; color: var(--quiet); font: 9px var(--mono); letter-spacing: .08em; text-align: center; text-transform: uppercase; }
+
+    .footer { padding: 55px 0 29px; border-top: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+    .footer-main { display: grid; grid-template-columns: 1.1fr .9fr; gap: 55px; padding-bottom: 44px; }
+    .footer-logos { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .footer-logo { width: 88px; height: 88px; object-fit: contain; }
+    .tagline { color: var(--muted); font-size: 13px; }
+    .company-description { max-width: 550px; margin: 14px 0 11px; color: #40563b; font-size: 13px; line-height: 1.85; }
+    .download { display: inline-flex; align-items: center; gap: 10px; margin-top: 17px; border: 1px solid rgba(42, 124, 19, .55); border-radius: 3px; padding: 12px 15px; color: #2a7c13; font-size: 11px; text-decoration: none; transition: background .2s; }
+    .download:hover { background: rgba(118, 196, 87, .18); }
+    .download svg { width: 15px; height: 15px; }
+    .credits-head { margin-bottom: 12px; color: var(--quiet); font: 9px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .credits { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 18px; color: #334b31; font-size: 10px; line-height: 1.6; }
+    .credits-wide { grid-column: 1 / -1; }
+    .credits b { color: var(--quiet); font-weight: 500; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 18px; border-top: 1px solid var(--line); padding-top: 17px; color: var(--quiet); font: 9px var(--mono); }
+
+    .reveal { opacity: 0; transform: translateY(38px) scale(.985); filter: blur(7px); transition: opacity .85s cubic-bezier(.2,.75,.25,1), transform .9s cubic-bezier(.2,.75,.25,1), filter .8s ease; transition-delay: var(--reveal-delay, 0ms); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    .hero > .eyebrow { animation: arrive .75s both; }
+    .hero-copy h1 { animation: arrive .9s .12s both; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(24px); filter: blur(8px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      .nav { height: 64px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .menu-toggle svg { width: 22px; }
+      .navlinks { position: absolute; top: 63px; right: 0; left: 0; display: none; align-items: stretch; gap: 0; border-bottom: 1px solid var(--line); padding: 7px 18px 15px; background: var(--night); }
+      .navlinks.open { display: flex; flex-direction: column; }
+      .navlinks a { padding: 13px 2px; }
+      .navlinks .nav-cta { margin-top: 6px; padding-left: 12px; }
+      .wordmark-caption { display: none; }
+      .hero { padding: 42px 0 72px; }
+      .image-grid { grid-template-columns: 1fr 1fr; gap: 9px; margin: 18px 0 31px; }
+      .image-tile { height: clamp(190px, 52vw, 270px); }
+      .tile-index, .tile-label { left: 10px; font-size: 8px; }
+      .tile-label { bottom: 10px; }
+      .hero-copy { grid-template-columns: 1fr; gap: 17px; }
+      h1 { font-size: clamp(37px, 10vw, 56px); }
+      .hero-sub { font-size: 14px; }
+      .hero-body { font-size: 12px; }
+      .hero-foot { flex-wrap: wrap; line-height: 1.7; }
+      .app-section { padding: 75px 0 78px; }
+      .app-layout { grid-template-columns: 1fr; gap: 27px; }
+      .section-copy { font-size: 13px; }
+      .app-screens { gap: 10px; }
+      .demo-section { padding: 76px 0 80px; }
+      .demo-heading { margin-bottom: 26px; }
+      .demo-heading p { font-size: 12px; }
+      .demo-frame { aspect-ratio: 4 / 3; }
+      .play-button { width: 55px; height: 55px; }
+      .footer-main { grid-template-columns: 1fr; gap: 35px; padding-bottom: 31px; }
+      .footer-bottom { flex-direction: column; gap: 8px; }
+    }
+    @media (max-width: 380px) {
+      .wrap { width: calc(100% - 28px); }
+      .image-tile { height: 184px; }
+      .app-screens { gap: 7px; }
+      .credits { grid-template-columns: 1fr; }
+      .credits-wide { grid-column: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .image-tile, .image-tile img, .hero > .eyebrow, .hero-copy h1 { animation: none; transition: none; transform: none; filter: none; }
+      .image-tile { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="wordmark" href="#top" aria-label="SOURCE home">
+        <img class="nav-logo transparent-logo" src="sourcelogo.webp" alt="SOURCE logo">
+        <img class="nav-logo transparent-logo" src="aidroponicslogo.webp" alt="AI-Drophonics logo">
+        <span class="wordmark-caption">SMART HYDROPONICS</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="navlinks">
+        <a href="#system">System</a><a href="#app">Mobile app</a><a href="#demo">Demo</a><a class="nav-cta" href="#about">About SOURCE <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap" id="system">
+      <div class="eyebrow">Field intelligence / Quezon City</div>
+      <div class="image-grid reveal" aria-label="Hydroponic farm and monitoring system">
+        <figure class="image-tile"><img class="hardware-photo" src="hardware.jpg" alt="AI-Drophonics hydroponic grow bed and controller hardware"><span class="tile-index">01 / SYSTEM</span><figcaption class="tile-label">Prototype in the grow bed</figcaption></figure>
+        <figure class="image-tile"><img src="hardware2.png" alt="AI-Drophonics hydroponics hardware prototype"><span class="tile-index">02 / HARDWARE</span><figcaption class="tile-label">Monitoring device</figcaption></figure>
+        <figure class="image-tile"><img src="plants.jpg" alt="Lettuce growing in the urban hydroponic farm"><span class="tile-index">03 / GROW</span><figcaption class="tile-label">Urban farm</figcaption></figure>
+        <figure class="image-tile"><img src="monitoring.jpg" alt="AI-Drophonics mobile sensor monitoring dashboard"><span class="tile-index">04 / MONITOR</span><figcaption class="tile-label">Live sensor readings</figcaption></figure>
+      </div>
+      <div class="hero-copy reveal">
+        <div>
+          <h1>AI-Drophonics<br><span class="gradient-text">Smart Farming,</span><br>Smarter Protection</h1>
+          <p class="hero-sub">An IoT-based hydroponics monitoring and automation system with integrated AI crop disease detection, purpose-built for urban farms.</p>
+          <div class="hero-foot"><i class="live-dot" aria-hidden="true"></i> Raspberry Pi 5 / YOLOv8n / Built for urban farms</div>
+        </div>
+        <p class="hero-body">AI-Drophonics combines a Raspberry Pi 5 edge device, real-time YOLOv8n object detection, and automated sensor-driven responses to help urban farmers catch crop disease before it spreads, without watching over their farm all day. Built by SOURCE for Gulayan at Bulaklakan Integrated National Urban Farm, Quezon City.</p>
+      </div>
+    </section>
+
+    <section class="app-section" id="app">
+      <div class="wrap app-layout">
+        <div class="reveal">
+          <div class="eyebrow">Your farm, in focus</div>
+          <h2>Monitor. Detect.<br><span class="gradient-text">Act — From Your Phone.</span></h2>
+          <p class="section-copy">The AI-Drophonics companion app gives urban farmers real-time visibility into pH, temperature, humidity, and water levels, live disease detection alerts via push notification, AI-generated treatment recommendations, and a centralized dashboard, all from an Android device.</p>
+          <div class="metric-list">
+            <div class="metric"><b>01 / Track</b>Live sensor readings</div>
+            <div class="metric"><b>02 / Detect</b>Disease alerts</div>
+            <div class="metric"><b>03 / Advise</b>AI treatment guidance</div>
+            <div class="metric"><b>04 / Control</b>Farm automation</div>
+          </div>
+        </div>
+        <div class="app-screens reveal" aria-label="AI-Drophonics Android application screenshots">
+          <figure class="app-shot"><img src="monitoring1.jpg" alt="AI-Drophonics sensor readings for temperature, humidity, soil moisture, and water level"><figcaption>Live sensor monitoring</figcaption></figure>
+          <figure class="app-shot"><img src="aidetection.jpg" alt="AI-Drophonics disease detection and treatment recommendation screen"><figcaption>AI disease detection</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demo">
+      <div class="wrap">
+        <div class="demo-heading reveal">
+          <div class="eyebrow">On the farm</div>
+          <h2>See It in <span class="gradient-text">Action</span></h2>
+          <p>Watch AI-Drophonics detect crop disease and automate farm response in real conditions at Gulayan at Bulaklakan.</p>
+        </div>
+        <div class="demo-frame reveal" role="group" aria-label="AI-Drophonics demo video placeholder">
+          <img src="plants.jpg" alt="Lettuce growing in the AI-Drophonics urban hydroponic farm">
+          <div class="demo-content">
+            <button class="play-button" type="button" aria-label="Demo footage coming soon">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 3.7c0-.8.9-1.3 1.6-.9l9.1 5.5a2 2 0 0 1 0 3.4l-9.1 5.5c-.7.4-1.6-.1-1.6-.9V3.7Z"/></svg>
+            </button>
+            <strong>AI-Drophonics / Field demo</strong>
+            <span>GULAYAN AT BULAKLAKAN · QUEZON CITY</span>
+          </div>
+        </div>
+        <div class="demo-status" aria-live="polite">Demo footage coming soon</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="about">
+    <div class="wrap">
+      <div class="footer-main reveal">
+        <div>
+          <div class="footer-logos"><img class="footer-logo transparent-logo" src="sourcelogo.webp" alt="SOURCE logo"><img class="footer-logo transparent-logo" src="aidroponicslogo.webp" alt="AI-Drophonics logo"></div>
+          <p class="tagline">Where Solution Begins.</p>
+          <p class="company-description">SOURCE is a Filipino technology startup founded by five Information Technology students from NU Fairview, Quezon City. The company name reflects the team's core belief that effective innovation begins at the source, where diverse technical expertise, collaboration, and emerging technologies converge to create practical, real-world solutions.</p>
+          <a class="download" href="SOURCE-Startup-Documentation.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>
+            Download startup documentation
+          </a>
+        </div>
+        <div>
+          <div class="credits-head">The people behind the system</div>
+          <div class="credits">
+            <span>Concepcion, Justine Altaire B.</span><span>De Juan, Axel P.</span>
+            <span>Lingatong, Nazh Manuel V.</span><span>Odon, Marc Joseph V.</span>
+            <span>Salvador, Gerard Jose N.</span>
+            <span class="credits-wide"><b>Adviser</b> / Maria Carolina Bautista</span>
+            <span class="credits-wide"><b>Subject Teacher</b> / Arnel Balasta</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom reveal"><span>SOURCE / AI-DROPHONICS</span><span>ACADEMIC YEAR 2026–2027</span><span>QUEZON CITY, PHILIPPINES</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.navlinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+    });
+
+    navLinks.addEventListener('click', event => {
+      if (event.target.closest('a')) {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation');
+      }
+    });
+
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach((element, index) => {
+      element.style.setProperty('--reveal-delay', `${index % 3 * 100}ms`);
+      revealObserver.observe(element);
+    });
+
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.image-tile').forEach(tile => {
+        tile.addEventListener('pointermove', event => {
+          const bounds = tile.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width - .5;
+          const y = (event.clientY - bounds.top) / bounds.height - .5;
+          tile.style.setProperty('--pointer-tilt-x', `${-y * 5}deg`);
+          tile.style.setProperty('--pointer-tilt-y', `${x * 7}deg`);
+        });
+        tile.addEventListener('pointerleave', () => {
+          tile.style.setProperty('--pointer-tilt-x', '0deg');
+          tile.style.setProperty('--pointer-tilt-y', '0deg');
+        });
+      });
+    }
+
+    const logoCanvases = new Map();
+    document.querySelectorAll('.transparent-logo').forEach(async image => {
+      try {
+        await image.decode();
+        const source = image.getAttribute('src');
+        if (!logoCanvases.has(source)) {
+          const canvas = document.createElement('canvas');
+          canvas.width = image.naturalWidth;
+          canvas.height = image.naturalHeight;
+          const context = canvas.getContext('2d', { willReadFrequently: true });
+          context.drawImage(image, 0, 0);
+          const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+
+          for (let index = 0; index < pixels.data.length; index += 4) {
+            const red = pixels.data[index];
+            const green = pixels.data[index + 1];
+            const blue = pixels.data[index + 2];
+            const darkest = Math.min(red, green, blue);
+            const lightest = Math.max(red, green, blue);
+            if (darkest < 228 || lightest - darkest > 18) continue;
+
+            const alpha = Math.max(0, Math.min(255, Math.round((250 - darkest) * 255 / 22)));
+            if (alpha < 16) {
+              pixels.data[index + 3] = 0;
+              continue;
+            }
+
+            const whiteMatte = 255 - alpha;
+            pixels.data[index] = Math.max(0, Math.min(255, Math.round((red - whiteMatte) * 255 / alpha)));
+            pixels.data[index + 1] = Math.max(0, Math.min(255, Math.round((green - whiteMatte) * 255 / alpha)));
+            pixels.data[index + 2] = Math.max(0, Math.min(255, Math.round((blue - whiteMatte) * 255 / alpha)));
+            pixels.data[index + 3] = alpha;
+          }
+
+          context.putImageData(pixels, 0, 0);
+          logoCanvases.set(source, canvas.toDataURL('image/png'));
+        }
+        image.src = logoCanvases.get(source);
+        if (source === 'aidroponicslogo.webp') {
+          document.querySelector('#brand-favicon').href = logoCanvases.get(source);
+        }
+        image.classList.add('is-ready');
+      } catch {
+        image.classList.add('is-ready');
+      }
+    });
+
+    document.querySelector('.play-button').addEventListener('click', () => {
+      document.querySelector('.demo-status').textContent = 'On-farm demo footage is being prepared.';
+    });
+  </script>
+</body>
+</html>

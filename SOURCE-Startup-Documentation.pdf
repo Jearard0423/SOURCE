@@ -1,0 +1,52 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 2316 >>
+stream
+BT /F1 27 Tf 0 0.78 1 rg 1 0 0 1 54 730 Tm (SOURCE) Tj ET
+BT /F1 9 Tf 0.69 0.92 0.55 rg 1 0 0 1 54 695 Tm (WHERE SOLUTION BEGINS.) Tj ET
+BT /F1 14 Tf 1 1 1 rg 1 0 0 1 54 663 Tm (AI-DROPHONICS | STARTUP SYSTEM BRIEF) Tj ET
+BT /F1 11 Tf 0 0.78 1 rg 1 0 0 1 54 620 Tm (ABOUT THE SYSTEM) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 598 Tm (AI-Drophonics is an IoT-based hydroponics monitoring and automation system with integrated) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 581 Tm (AI crop disease detection, purpose-built for urban farms in the Philippines.) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 555 Tm (Built by SOURCE for Gulayan at Bulaklakan Integrated National Urban Farm in Quezon City, the) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 538 Tm (system helps farmers catch crop disease before it spreads without watching the farm all day.) Tj ET
+BT /F1 11 Tf 0 0.78 1 rg 1 0 0 1 54 512 Tm (HOW IT WORKS) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 490 Tm (A Raspberry Pi 5 edge device runs real-time YOLOv8n object detection and receives readings) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 473 Tm (from environmental sensors. Sensor-driven responses automate farm actions, while the) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 456 Tm (companion Android app brings farm status and alerts to the farmer.) Tj ET
+BT /F1 11 Tf 0 0.78 1 rg 1 0 0 1 54 430 Tm (MONITOR, DETECT, ACT) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 408 Tm (The app provides real-time pH, temperature, humidity, and water-level visibility; push) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 391 Tm (notifications for disease detection; AI-generated treatment recommendations; and a) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 374 Tm (centralized farm dashboard.) Tj ET
+BT /F1 11 Tf 0 0.78 1 rg 1 0 0 1 54 348 Tm (PROJECT TEAM) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 326 Tm (Concepcion, Justine Altaire B. | De Juan, Axel P. | Lingatong, Nazh Manuel V. | Odon, Marc) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 309 Tm (Joseph V. | Salvador, Gerard Jose N.) Tj ET
+BT /F1 10 Tf 0.79 0.84 0.9 rg 1 0 0 1 54 283 Tm (Adviser: Maria Carolina Bautista | Subject Teacher: Arnel Balasta) Tj ET
+BT /F1 8 Tf 0.55 0.63 0.72 rg 1 0 0 1 54 248 Tm (ACADEMIC YEAR 2026-2027  /  QUEZON CITY, PHILIPPINES) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2678
+%%EOF
